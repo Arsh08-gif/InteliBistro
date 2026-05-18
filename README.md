@@ -1,6 +1,12 @@
 # Manara — Mobile App
 
 React Native (Expo) mobile app for the Manara intelligent restaurant experience. Order food, make reservations, and explore the menu — all through natural conversation with an AI.
+## Screen Shots
+<img width="150"  alt="Starter Screen" src="https://github.com/user-attachments/assets/c9c35607-b62d-4109-ace5-ab30296432ab" />
+<img width="150"  alt="Menu Screen" src="https://github.com/user-attachments/assets/d5d33415-a098-48db-9205-dede8b66d638" />
+<img width="150"  alt="Chat Screen" src="https://github.com/user-attachments/assets/8d89afaf-3568-4f4d-9712-924db5fb74ee" />
+<img width="150"  alt="Reservation Screen" src="https://github.com/user-attachments/assets/b20dab21-b1fe-4654-8a21-e1f9b128596b" />
+<img width="150"  alt="Cart Screen" src="https://github.com/user-attachments/assets/64c0d44e-469f-4a3c-97f5-a96253db834d" />
 
 ## Features
 
