@@ -1,0 +1,136 @@
+import { StyleSheet } from 'react-native';
+import { colors } from '../../constants/colors';
+
+export default StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.bg,
+  },
+  header: {
+    paddingHorizontal: 20,
+    paddingTop: 16,
+    paddingBottom: 4,
+  },
+  headerSubtitle: {
+    fontSize: 9,
+    letterSpacing: 3,
+    color: colors.gold,
+    fontFamily: 'DMSerifDisplay_400Regular',
+  },
+  headerTitle: {
+    fontSize: 26,
+    color: colors.cream,
+    fontFamily: 'DMSerifDisplay_400Regular',
+  },
+  tabsRow: {
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    paddingVertical: 14,
+    gap: 8,
+  },
+  categoryTab: {
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    borderRadius: 16,
+    backgroundColor: 'rgba(255,255,255,0.05)',
+    borderWidth: 0.5,
+    borderColor: 'rgba(205,177,120,0.3)',
+  },
+  categoryTabActive: {
+    backgroundColor: colors.gold,
+    borderColor: colors.gold,
+  },
+  categoryText: {
+    fontSize: 10,
+    color: colors.muted,
+    letterSpacing: 1,
+    fontFamily: 'DMSans_400Regular',
+  },
+  categoryTextActive: {
+    color: colors.bg,
+    fontWeight: '700',
+    fontFamily: 'DMSans_700Bold',
+  },
+  glassSlab: {
+    margin: 16,
+    backgroundColor: 'rgba(2, 26, 22, 0.45)',
+    borderRadius: 20,
+    borderWidth: 0.5,
+    borderColor: 'rgba(121, 103, 66, 0.03)',
+    overflow: 'hidden',
+    flex: 1,
+  },
+  itemRow: {
+    padding: 14,
+    borderBottomWidth: 0.5,
+    borderBottomColor: 'rgba(121, 108, 82, 0.57)',
+  },
+  itemTopRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 4,
+  },
+  itemName: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: colors.cream,
+    flex: 1,
+    paddingRight: 8,
+    fontFamily: 'DMSerifDisplay_400Regular',
+  },
+  itemPrice: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: colors.gold,
+    flexShrink: 0,
+    fontFamily: 'DMSans_700Bold',
+  },
+  itemDescription: {
+    fontSize: 11,
+    color: colors.muted,
+    lineHeight: 16,
+    marginBottom: 8,
+    fontFamily: 'DMSans_400Regular',
+  },
+  itemBottomRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  tag: {
+    fontSize: 9,
+    color: colors.muted,
+    borderWidth: 0.5,
+    borderColor: 'rgba(205,177,120,0.2)',
+    borderRadius: 8,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    backgroundColor: 'rgba(255,255,255,0.05)',
+  },
+  tagBestseller: {
+    color: colors.gold,
+    borderColor: 'rgba(205,177,120,0.3)',
+    backgroundColor: 'rgba(205,177,120,0.1)',
+  },
+  addButton: {
+    width: 26,
+    height: 26,
+    backgroundColor: colors.gold,
+    borderRadius: 13,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  addButtonText: {
+    color: colors.bg,
+    fontSize: 16,
+    fontWeight: '700',
+    marginTop: -1,
+  },
+  subtitle: {
+    color: colors.muted,
+    fontSize: 11,
+    paddingHorizontal: 20,
+    marginBottom: 4,
+  },
+});
