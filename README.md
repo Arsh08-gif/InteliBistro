@@ -1,6 +1,13 @@
 # Manara — Mobile App
 
 React Native (Expo) mobile app for the Manara intelligent restaurant experience. Order food, make reservations, and explore the menu — all through natural conversation with an AI.
+## Download
+ 
+[![Download APK](https://img.shields.io/badge/Download-APK-green?style=for-the-badge&logo=android)](https://github.com/Arsh08-gif/InteliBistro/releases/download/v1.0.0/application-af13648d-dba8-4e94-bc9e-f49d6b9bc246.apk)
+ 
+> **Install instructions:** Download the APK, enable "Install from unknown sources" in Android settings if prompted, and install.
+
+
 ## Screen Shots
 <img width="150"  alt="Starter Screen" src="https://github.com/user-attachments/assets/c9c35607-b62d-4109-ace5-ab30296432ab" />
 <img width="150"  alt="Menu Screen" src="https://github.com/user-attachments/assets/d5d33415-a098-48db-9205-dede8b66d638" />
@@ -8,36 +15,70 @@ React Native (Expo) mobile app for the Manara intelligent restaurant experience.
 <img width="150"  alt="Reservation Screen" src="https://github.com/user-attachments/assets/b20dab21-b1fe-4654-8a21-e1f9b128596b" />
 <img width="150"  alt="Cart Screen" src="https://github.com/user-attachments/assets/64c0d44e-469f-4a3c-97f5-a96253db834d" />
 
+
+## Data Flow
+ 
+```
+Android App
+    │
+    ├── GET /api/menu ──────────────► Node.js (Railway)
+    │                                  └── returns menu.json
+    │
+    ├── POST /api/chat ─────────────► Node.js (Railway)
+    │   { message, cart,               └── calls Groq API
+    │     history, reservations }            └── LLaMA 3.3 70B
+    │                                              └── returns JSON
+    │                               { reply, actions[] }
+    │                                    │
+    │                               App parses actions
+    │                               └── updates Zustand store
+    │                                   (cart + reservations)
+    │
+    └── POST /api/order ────────────► Node.js (Railway)
+        { cart }                       └── calls Resend API
+                                            └── sends email
+```
+ 
+## AI Chat Flow
+ 
+```
+User: "Add two spicy chicken sandwiches and a water"
+      ↓
+POST /api/chat
+{
+  message: "Add two spicy chicken sandwiches and a water",
+  cart: [...],          ← current cart state
+  history: [...],       ← last 10 messages for context
+  reservations: [...]   ← current reservations
+}
+      ↓
+Backend builds system prompt with full menu + context
+      ↓
+Groq LLaMA 3.3 70B processes natural language
+      ↓
+Returns structured JSON:
+{
+  "reply": "Added two Spicy Chicken Sandwiches and a Large Water!",
+  "actions": [
+    { "type": "add", "itemId": "burger-2", "qty": 2 },
+    { "type": "add", "itemId": "drink-2", "qty": 1 }
+  ]
+}
+      ↓
+applyActions() → Zustand store updates
+Cart syncs across all screens in real time
+```
+
+
 ## Features
-
-###  AI-Powered Ordering
-Chat naturally with the AI server to manage your order:
-- "Add two spicy chicken sandwiches and a water"
-- "Make the sandwich 3"
-- "Remove the burger"
-- "Place my order" — sends email confirmation
-
-###  Smart Reservations
-Book and manage tables through conversation or the reservation screen:
-- "Book a table for 4 at 7pm tonight"
-- "Cancel my reservation for 5 people"
-- Max 3 reservations per slot per day
-- Dynamic time slots from 12:00 PM to 9:00 PM
-
-###  Menu Browsing
-- Category tabs (Mains, Sides, Drinks, Desserts)
-- Food photography from Unsplash
-- Glassmorphism UI design
-- Add items directly to cart
-
-###  Cart Management
-- Add, remove, update quantities
-- Tax calculation
-- Animated cart badge with bounce effect
-- Haptic feedback on interactions
-
-###  Email Confirmation
-Order placed → confirmation email sent automatically via Resend
+ 
+-  **AI ordering** — natural language cart management via Groq LLaMA 3.3 70B
+-  **Smart reservations** — max 3 bookings per slot per day
+-  **Email confirmation** — HTML order confirmation via Resend
+-  **Premium UI** — Yayoi-inspired dark teal palette with glassmorphism
+-  **Custom fonts** — FleurDeLeah + DM Serif Display + DM Sans
+-  **Haptic feedback** +  **Animated cart badge**
+-  **Onboarding flow** — 3-screen first launch experience
 
 ###  Design
 - Yayoi-inspired dark teal palette
@@ -118,4 +159,5 @@ Scan the QR code with **Expo Go** on your Android or iOS device.
 
 ## Environment
 
-Requires the [Manara Backend](https://github.com/your-username/manara-backend) running locally on port 3001.
+Powered by [Manara Backend](https://github.com/Arsh08-gif/IntelliBistro-backend) — deployed on Railway.
+Backend Repo https://github.com/Arsh08-gif/IntelliBistro-backend
