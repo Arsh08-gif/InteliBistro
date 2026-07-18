@@ -10,6 +10,7 @@ import { useFonts } from '@expo-google-fonts/dm-serif-display';
 import CustomTabBar from "./src/components/CustomTabBar";
 import * as Font from 'expo-font';
 import Onboarding from "./src/components/Onboarding";
+import Toast from 'react-native-toast-message';
 
 // importing the screens :
 import HomeScreen from "./src/screen/HomeScreen";
@@ -42,11 +43,16 @@ export default function App() {
   }
 
   if (showOnboarding) {
-    return <Onboarding onDone={handleDone} />;
+    return (
+      <SafeAreaProvider>
+        <Onboarding onDone={handleDone} />
+      </SafeAreaProvider>
+    );
   }
 
   return (
     <SafeAreaProvider>
+      
       <NavigationContainer>
         <Tab.Navigator
           tabBar={(props) => <CustomTabBar {...props} />}
@@ -61,6 +67,7 @@ export default function App() {
           <Tab.Screen name="Reserve" component={ReservationScreen} />
         </Tab.Navigator>
       </NavigationContainer>
+      <Toast />
     </SafeAreaProvider>
   )
 }

@@ -28,7 +28,7 @@ export default function ChatScreen() {
     const addReservation = useCartStore(state => state.addReservation)
     const cancelReservation = useCartStore(state => state.cancelReservation)
     const reservations = useCartStore(state => state.reservations)
-    const clearcart = useCartStore(state => state.clearcart)
+    const clearcart = useCartStore(state => state.clearCart)
     
 
     useEffect(() => {
@@ -105,7 +105,7 @@ export default function ChatScreen() {
             setMessages(prev => [...prev, aiMessage])
 
         } catch (error) {
-            const errorMessage = { id: (Date.now() + 1).toString(), role: 'assistant', content: "Sorry, I dropped that order slip 😅 Try again?" }
+            const errorMessage = { id: (Date.now() + 1).toString(), role: 'assistant', content: `Cannot order right now! please come back later` }
             setMessages(prev => [...prev, errorMessage])
             console.log('send chat error : ', error);
 

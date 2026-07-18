@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { View, Text, TouchableOpacity, FlatList, Dimensions, ImageBackground } from 'react-native';
 import { colors } from '../constants/colors';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const { width } = Dimensions.get('window')
 const HERO_IMAGE = "https://images.unsplash.com/photo-1577219492769-b63a779fac28?q=80&w=998&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -32,6 +33,7 @@ const SLIDES = [
 export default function Onboarding({ onDone }) {
     const [currentIndx, setCurrentIdx] = useState(0)
     const flatListRef = useRef(null)
+    const insets = useSafeAreaInsets();
 
     const handleNext = () => {
         if (currentIndx < SLIDES.length - 1) {
@@ -122,7 +124,7 @@ export default function Onboarding({ onDone }) {
                 />
 
                 {/* Dots and next button */}
-                <View style={{ paddingBottom: 48, alignItems: 'center', gap: 24 }}>
+                <View style={{ paddingBottom: insets.bottom + 24, paddingHorizontal: 24, alignItems: 'center', gap: 24 }}>
                     <View style={{ flexDirection: 'row', gap: 8 }}>
                         {SLIDES.map((_, i) => (
                             <View key={i} style={{

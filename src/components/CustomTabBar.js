@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Animated } from 'react-native';
 import { colors } from '../constants/colors';
 import { Ionicons } from '@expo/vector-icons';
 import useCartStore from '../store/cartStore'
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const TABS = [
     { name: 'Menu', center: false },
@@ -26,6 +27,7 @@ export default function CustomTabBar({ state, navigation }) {
     const cart = useCartStore(state => state.cart)
     const cartCount = cart.reduce((sum, item) => sum + item.qty, 0)
     const bounceAnim = useRef(new Animated.Value(1)).current
+    const insets = useSafeAreaInsets();
     useEffect(() => {
         if (cartCount > 0) {
             console.log('inside animation');
@@ -46,7 +48,7 @@ export default function CustomTabBar({ state, navigation }) {
             borderTopWidth: 0.5,
             borderTopColor: 'rgba(205,177,120,0.15)',
             paddingHorizontal: 8,
-            paddingBottom: 24,
+            paddingBottom: insets.bottom + 12,
             paddingTop: 12,
             alignItems: 'flex-end',
             justifyContent: 'space-around',
