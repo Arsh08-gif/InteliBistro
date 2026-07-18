@@ -1,23 +1,41 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { placeOrder } from '../api/bistroApi';
+import { placeorder } from '../api/bistroApi';
 import useCartStore from '../store/cartStore';
 import styles from './styles/CartScreen.styles';
+import Toast from 'react-native-toast-message';
 
 export default function CartScreen() {
 
     // fetching states from store
     const cart = useCartStore(state => state.cart)
     const updateQty = useCartStore(state => state.updateQty)
+    const clearCart = useCartStore(state => state.clearCart)
 
     const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0)
 
     const place_order = async () => {
-        console.log('placng order');
-        const result = await placeOrder(cart)
-        console.log('order placed ', result);
-        clearcart();
+        try {
+            console.log('placing order');
+            const result = await placeorder(cart);
+            console.log('order placed:', result);
+            Toast.show({
+                type: 'success',
+                text1: 'Order Placed!',
+                text2: 'Confirmation email sent to your inbox',
+                visibilityTime: 3000,
+            });
+            clearCart();
+        } catch (error) {
+            Toast.show({
+                type: 'error',
+                text1: 'Order Failed',
+                text2: 'Please try again',
+                visibilityTime: 3000,
+            });
+            console.log('order error:', error.message);
+        }
     }
 
     if (cart.length === 0) {
@@ -70,7 +88,7 @@ export default function CartScreen() {
                     <Text style={styles.totalAmount}>${total.toFixed(2)}</Text>
                 </View>
                 <TouchableOpacity
-                    onPress={ place_order }
+                    onPress={place_order}
                     style={styles.orderButton}>
                     <Text style={styles.orderButtonText}>Place Order</Text>
                 </TouchableOpacity>

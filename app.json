@@ -17,11 +17,10 @@
     "android": {
       "usesCleartextTraffic": true,
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/android-icon-foreground.png",
-        "backgroundImage": "./assets/android-icon-background.png",
-        "monochromeImage": "./assets/android-icon-monochrome.png"
-      }
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#0D1F1C"
+      },
+      "package": "com.ozark_08.bistroapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -30,6 +29,12 @@
       "@react-native-community/datetimepicker",
       "expo-font",
       "expo-mail-composer"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "bc2e6228-5e27-4ebb-b7d1-b3a9a533cacc"
+      }
+    },
+    "owner": "ozark_08"
   }
 }
